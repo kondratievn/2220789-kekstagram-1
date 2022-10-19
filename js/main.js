@@ -61,7 +61,7 @@ let avatarMaxNumber = 0;
 const createComment = () => {
   return {
     id: commentId++,
-    message: getRandomArrayElement(DESCRIPTIONS),
+    message: getRandomArrayElement(COMMENTS),
     avatar: `img/avatar${getRandomNumber(1, avatarMaxNumber)}.svg`,
     name: getRandomArrayElement(NAMES)
   }
@@ -77,7 +77,7 @@ const createPicture = () => {
     url: `photos/${pictureId++}.jpg`,
     likes: getRandomNumber(minLikes, maxLikes),
     comment: createComment(commentQuantity),
-    description: DESCRIPTIONS(getRandomElement(DESCRIPTIONS))
+    description: getRandomElement(DESCRIPTIONS)
   }
 };
   
