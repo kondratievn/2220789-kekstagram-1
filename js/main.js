@@ -27,6 +27,7 @@ const COMMENTS = [
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
 ];
 
+const PICTURES_NUMBER = 25;
 
 
 const getRandomPositiveInteger = (a, b) => {
@@ -37,7 +38,7 @@ const getRandomPositiveInteger = (a, b) => {
 };
 
 
-function checkStringLength (string, maxLength) {
+function checkLength (string, maxLength) {
   return string.length <= maxLength;
 }
 
@@ -49,42 +50,40 @@ function getRandomNumber(min, max) {
 console.log(getRandomNumber(1, 3));
 
 
-function getRandomElement (elements){
-  return elements[getRandomNumber(0, elements.length - 1)];
-}
+const getRandomArrayElement = (elements) => {
+  return elements[getRandomPositiveInteger(0, elements.length - 1)];
+};
 
 
-let avatarMaxNumber = 6
-let commentsId = 0;
-function createComments (count){
-  const comments = [];
-  for (let i = 0; i < count; i++){
-    const anyComment = {
-      id: commentsId++,
-      avatar: `img/avatar${getRandomNumber(1, avatarMaxNumber)}.svg`,
-      message: COMMENTS(getRandomElement(COMMENTS)),
-      name: NAMES(getRandomElement(NAMES))
-    };
-    comments.push(anyComment);
+
+let commentId = 0;
+let avatarMaxNumber = 0;
+const createComment = () => {
+  return {
+    id: commentId++,
+    message: getRandomArrayElement(DESCRIPTIONS),
+    avatar: `img/avatar${getRandomNumber(1, avatarMaxNumber)}.svg`,
+    name: getRandomArrayElement(NAMES)
   }
-  return comments
-} 
+};
 
-let commentsQuantity = 50
-let minLikes = 15
-let maxLikes = 200
-function createPicture (count){
-  const picture = [];
-  for (let i = 0; i < count; i++){
-    const anyPicture = {
-      id: i++,
-      url: `photos/${i++}.jpg`,
-      likes: getRandomNumber(minLikes, maxLikes),
-      comments: createComments(commentsQuantity),
-      description: DESCRIPTIONS(getRandomElement(DESCRIPTIONS))
-
-    };
+let commentQuantity = 0;
+let minLikes = 0;
+let maxLikes = 0;
+let pictureId = 0;
+const createPicture = () => {
+  return {
+    id: pictureId++,
+    url: `photos/${pictureId++}.jpg`,
+    likes: getRandomNumber(minLikes, maxLikes),
+    comment: createComment(commentQuantity),
+    description: DESCRIPTIONS(getRandomElement(DESCRIPTIONS))
   }
-}
+};
+  
+
+checkLength(); 
+createPicture(PICTURES_NUMBER);
+  
  
-console.log('Привет как дела', 6);
+
