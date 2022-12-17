@@ -1,19 +1,9 @@
-function getrandomInteger(min, max) {
-    // случайное число от min до (max+1)
-    let rand = min + Math.random() * (max + 1 - min);
-    return Math.floor(rand);
-  }
-  
-  console.log(getrandomInteger(1, 3));
+import {photos} from './data.js';
+import {renderPhotos} from './pictures.js';
+import './formUpload.js';
+import './showBigPictures.js';
+import './hashtags.js';
+import './scalingPhoto.js';
+import './effectsOnPhoto.js';
 
-  
-  
-  function checkLength(str, maxLength){
-    if(str.length > maxLength){
-        return false;
-    }
-    else{
-        return true;
-    }
-  }
-  console.log('Привет как дела', 6);
+renderPhotos(photos);
