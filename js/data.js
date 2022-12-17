@@ -1,63 +1,59 @@
-import {checkLength, getRandomNumber, getRandomArrayElement} from './util.js';
+import { getRandomInteger } from  './utils.js';
+
+const COUNT = 25;
 
 const NAMES = [
-    'Никита',
-    'Влад',
-    'Костя',
-    'Антон',
-    'Сергей',
-    'Миша',
-    'Ярослав',
-    'Тимур',
-  ];
-  
+  'Артём',
+  'Евгений',
+  'Александр'
+];
+
+const MESSAGES = [
+  'Всё отлично!',
+  'В целом всё неплохо. Но не всё.',
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
+];
+
 const DESCRIPTIONS = [
-    'Я с семьёй',
-    'Я на отдыхе',
-    'Мы с друзьями',
-    'На дне рождении папы',
-    'У бабушки в саду',
-    'Моё 20-ти летие',
-    'Окончание школы',
-    'Летние каникулы',
-  ];
-  
-const COMMENTS = [
-    'Всё отлично!',
-    'В целом всё неплохо. Но не всё.',
-    'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-    'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  ];
-  
-const PICTURES_NUMBER = 25;
+  'Фотокарточка',
+  'Получился случайный снимок!',
+  'Как вам эти фотографии?'
+];
 
-let commentId = 0;
-let avatarMaxNumber = 0;
-const createComment = () => {
-  return {
-    id: commentId++,
-    message: getRandomArrayElement(COMMENTS),
-    avatar: `img/avatar${getRandomNumber(1, avatarMaxNumber)}.svg`,
-    name: getRandomArrayElement(NAMES)
+const Likes = {
+  MIN: 15,
+  MAX: 200
+};
+
+const photos = [];
+const commentsArray= (count) => {
+  const array = [];
+  for(let i = 0; i<count; i++){
+    array.push({
+      id: i,
+      avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+      message: MESSAGES[getRandomInteger(0, MESSAGES.length- 1)],
+      name: NAMES[getRandomInteger(0, NAMES.length - 1)]
+    });
+  }
+  return array;
+};
+
+const addPhotos = () => {
+  for(let i = 0; i < COUNT; i++){
+    photos.push({
+      id: i,
+      url: `photos/${i + 1}.jpg`,
+      description: DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)],
+      likes: getRandomInteger(Likes.MIN, Likes.MAX),
+      comments: commentsArray(getRandomInteger(0,2))
+    });
   }
 };
 
-let commentQuantity = 0;
-let minLikes = 0;
-let maxLikes = 0;
-let pictureId = 0;
-const createPicture = () => {
-  return {
-    id: pictureId++,
-    url: `photos/${pictureId++}.jpg`,
-    likes: getRandomNumber(minLikes, maxLikes),
-    comment: createComment(commentQuantity),
-    description: getRandomElement(DESCRIPTIONS)
-  }
-};
-  
+addPhotos();
 
-checkLength(); 
-createPicture(PICTURES_NUMBER);
-
-export {createPicture};
+export {photos};

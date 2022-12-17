@@ -1,5 +1,4 @@
-import {createPicture} from './data.js';
-
-createPicture();
-import {createMiniatures} from './miniatures.js';
-createMiniatures();
+import './formUpload.js';
+import './pictures.js';
+import './full-picture.js';
+import './hashtags.js';
